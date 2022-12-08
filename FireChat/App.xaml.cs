@@ -10,6 +10,8 @@ namespace FireChat
 	public partial class App : Application
 	{
 		private readonly ServiceProvider _serviceProvider;
+		public static string UserId = string.Empty;
+		public static string IdToken = string.Empty;
 
 		public App()
 		{
