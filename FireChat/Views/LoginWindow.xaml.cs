@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using FireChat.Interfaces;
+using FireChat.Models;
 
 namespace FireChat.Views
 {
@@ -19,23 +9,37 @@ namespace FireChat.Views
     /// </summary>
     public partial class LoginWindow : Window
     {
-        public LoginWindow()
+        private readonly ISecurityRepository _securityRepository;
+        private MainWindow _parentWindow;
+
+        public LoginWindow(ISecurityRepository securityRepository, MainWindow parentWindow)
         {
             InitializeComponent();
+            _securityRepository = securityRepository;
+            _parentWindow = parentWindow;
         }
 
-        private void SigninButton_OnClick(object sender, RoutedEventArgs e)
+        private void RegisterButton_OnClick(object sender, RoutedEventArgs e)
         {
-            Close();
-            var signinWindow = new SigninWindow();
-            signinWindow.Show();
-            signinWindow.Topmost = true;
-            signinWindow.Topmost = false;
+            var RegisterWindow = new RegisterWindow(_securityRepository, _parentWindow);
+            RegisterWindow.Show();
+            RegisterWindow.Topmost = true;
+            RegisterWindow.Topmost = false;
         }
 
-        private void LoginButton_OnClick(object sender, RoutedEventArgs e)
+        private async void LoginButton_OnClickAsync(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var credential = new Credential()
+            {
+                Email = EmailText.Text,
+                Password = PasswordText.Password
+            };
+            var result = await _securityRepository.Login(credential);
+            if (result)
+            {
+                _parentWindow.Authenticate();
+                Close();
+            }
         }
 
         private void CancelButton_OnClick(object sender, RoutedEventArgs e)

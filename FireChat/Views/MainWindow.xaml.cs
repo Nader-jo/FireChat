@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using FireChat.Interfaces;
+using System.Windows;
 
 namespace FireChat.Views
 {
@@ -7,20 +9,33 @@ namespace FireChat.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly ISecurityRepository _securityRepository;
+        private bool IsAuthenticated;
+
+        public MainWindow(ISecurityRepository securityRepository)
         {
             InitializeComponent();
+            _securityRepository = securityRepository;
+        }
+
+        public void Authenticate()
+        {
+            IsAuthenticated = true;
         }
 
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
-            Opacity = 0.4; 
-            var loginWindow = new LoginWindow
+            Opacity = 0.4;
+            var loginWindow = new LoginWindow(_securityRepository, this)
             {
                 Topmost = true
             };
-            loginWindow.Topmost = false;
             loginWindow.Show();
+        }
+
+        private void MainWindow_OnClosing(object? sender, CancelEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

@@ -13,11 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Views\SigninWindow.xaml.cs">
+    <Compile Update="Views\RegisterWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

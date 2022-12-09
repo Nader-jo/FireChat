@@ -1,10 +1,10 @@
-﻿<Window x:Class="FireChat.Views.SigninWindow"
+﻿<Window x:Class="FireChat.Views.RegisterWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen" AllowsTransparency="True"
-        ResizeMode="NoResize" WindowStyle="None" Title="Signin" Height="220" Width="350" Background="Transparent">
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" AllowsTransparency="True" ShowInTaskbar="False"
+        ResizeMode="NoResize" WindowStyle="None" Title="Register" Height="220" Width="350" Background="Transparent">
     <Border BorderBrush="Gray" CornerRadius="10" BorderThickness="1" Background="LightYellow">
         <Border Margin="10" BorderBrush="Gray" CornerRadius="10" BorderThickness="1" Background="White">
             <Grid Margin="10">
@@ -39,10 +39,10 @@
                            Grid.ColumnSpan="2" />
                 <PasswordBox x:Name="Password2Text" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="3" Height="20"
                              Margin="5,5,0,5" />
-                <TextBlock Grid.Row="6" Grid.Column="0" Name="SigninStatusText" />
-                <Button Grid.Row="6" Grid.Column="2" x:Name="SigninButton" Content="Signin" Height="20"
+                <TextBlock Grid.Row="6" Grid.Column="0" Name="RegisterStatusText" />
+                <Button Grid.Row="6" Grid.Column="2" x:Name="RegisterButton" Content="Register" Height="20"
                         Grid.ColumnSpan="2" Width="80" HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                        Click="SigninButton_OnClick" />
+                        Click="RegisterButton_OnClick" />
                 <Button Grid.Row="6" Grid.Column="4" x:Name="CancelButton" Content="Back" Height="20"
                         VerticalAlignment="Bottom" IsCancel="True" Click="CancelButton_OnClick" />
             </Grid>

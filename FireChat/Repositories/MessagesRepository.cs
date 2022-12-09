@@ -1,105 +1,30 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Net.Http;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using FireChat.Models;
 using FireChat.Interfaces;
+using FireChat.Models;
 
 namespace FireChat.Repositories
 {
-    public class MessagesRepository : IMessagesRepository
+    internal class MessagesRepository : BaseRepository, IMessagesRepository
     {
-        private static readonly string DbPath = ConfigurationManager.AppSettings.Get("fireBaseDb");
+        public async Task<bool> Delete(Message message) => await base.Delete(message);
 
-        public async Task<bool> Send<T>(T item) where T : HasId
+        public async Task<List<Message>> Read(User fromUser, string toUserEmail)
         {
-            var body = JsonConvert.SerializeObject(item);
-            var content = new StringContent(body, Encoding.UTF8, "application/json");
-
-            using var client = new HttpClient();
-            var result = await client.PostAsync($"{DbPath}{item.GetType().Name.ToLower()}.json?auth={App.IdToken}",
-                content);
-
-            if (result.IsSuccessStatusCode)
-            {
-                return true;
-            }
-
-            return false;
+            var messages = await Read<Message>();
+            return messages.FindAll(m =>
+                (m.FromUserEmail == fromUser.Credential.Email && m.ToUserEmail == toUserEmail) ||
+                (m.FromUserEmail == toUserEmail && m.ToUserEmail == fromUser.Credential.Email));
         }
 
-        public async Task<bool> Update<T>(T item) where T : HasId
+        public async Task<List<Message>> Read(User user)
         {
-            var body = JsonConvert.SerializeObject(item);
-            var content = new StringContent(body, Encoding.UTF8, "application/json");
-
-            using (var client = new HttpClient())
-            {
-                var result =
-                    await client.PutAsync($"{DbPath}{item.GetType().Name.ToLower()}/{item.Id}.json?auth={App.IdToken}",
-                        content);
-
-                if (result.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-
-                return false;
-            }
+            var messages = await Read<Message>();
+            return messages.FindAll(m => m.ToUserEmail == user.Credential.Email);
         }
 
-        public async Task<bool> Delete<T>(T item) where T : HasId
-        {
-            var body = JsonConvert.SerializeObject(item);
-            var content = new StringContent(body, Encoding.UTF8, "application/json");
+        public async Task<bool> Send(Message message) => await Create(message);
 
-            using (var client = new HttpClient())
-            {
-                var result =
-                    await client.DeleteAsync(
-                        $"{DbPath}{item.GetType().Name.ToLower()}/{item.Id}.json?auth={App.IdToken}");
-
-                if (result.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-
-                return false;
-            }
-        }
-
-        public async Task<List<T>> Read<T>() where T : HasId
-        {
-            List<T> items = new List<T>();
-
-            if (App.UserId != string.Empty)
-            {
-                using (var client = new HttpClient())
-                {
-                    var path = $"{DbPath}{typeof(T).Name.ToLower()}.json?auth={App.IdToken}";
-                    var result = await client.GetAsync(path);
-                    var jsonResult = await result.Content.ReadAsStringAsync();
-
-                    if (result.IsSuccessStatusCode)
-                    {
-                        var objects = JsonConvert.DeserializeObject<Dictionary<string, T>>(jsonResult);
-                        if (objects == null) return items;
-                        foreach (var o in objects)
-                        {
-                            o.Value.Id = o.Key;
-                            items.Add(o.Value);
-                        }
-
-                        return items;
-                    }
-
-                    return items;
-                }
-            }
-
-            return items;
-        }
+        public async Task<bool> Update(Message message) => await base.Update(message);
     }
 }

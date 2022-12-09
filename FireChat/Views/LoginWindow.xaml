@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" AllowsTransparency="True"
         ResizeMode="NoResize" WindowStyle="None" Loaded="LoginWindow_OnLoaded"
-        Title="Login" Height="220" Width="350" Background="Transparent">
+        Title="Login" Height="220" Width="350" Background="Transparent" ShowInTaskbar="False">
     <Border BorderBrush="Gray" CornerRadius="10" BorderThickness="1" Background="LightYellow">
         <Border Margin="10" BorderBrush="Gray" CornerRadius="10" BorderThickness="1" Background="White">
             <Grid Margin="10">
@@ -31,16 +31,16 @@
                          Margin="5,5,0,5" />
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Password" VerticalAlignment="Center" Grid.ColumnSpan="2" />
                 <PasswordBox x:Name="PasswordText" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Height="20"
-                         Margin="5,5,0,5" />
+                             Margin="5,5,0,5" />
                 <CheckBox x:Name="AutoLoginchk" Grid.Row="3" Grid.Column="0" Content="Auto login next time"
                           Grid.ColumnSpan="5" Margin="0,5,0,5" IsChecked="{Binding AutoLogin}" />
                 <TextBlock Grid.Row="5" Grid.Column="0" Name="LoginStatusText" />
-                <Button Grid.Row="5" Grid.Column="1" x:Name="SigninButton" Content="Signin" Height="20"
-                        Grid.ColumnSpan="2"
-                        Width="80" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="SigninButton_OnClick" />
+                <Button Grid.Row="5" Grid.Column="1" x:Name="RegisterButton" Content="Register" Height="20"
+                        Grid.ColumnSpan="2" Width="80" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                        Click="RegisterButton_OnClick" />
                 <Button Grid.Row="5" Grid.Column="2" x:Name="LoginButton" Content="Login" Height="20"
-                        Grid.ColumnSpan="2"
-                        Width="80" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="LoginButton_OnClick" />
+                        Grid.ColumnSpan="2" IsDefault="True" Width="80" HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom" Click="LoginButton_OnClickAsync" />
                 <Button Grid.Row="5" Grid.Column="4" x:Name="CancelButton" Content="Exit" Height="20"
                         VerticalAlignment="Bottom" IsCancel="True" Click="CancelButton_OnClick" />
             </Grid>

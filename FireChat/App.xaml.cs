@@ -28,6 +28,7 @@ namespace FireChat
             services.AddScoped<IMessagesRepository, MessagesRepository>();
             services.AddScoped<ISecurityRepository, SecurityRepository>();
             services.AddScoped<ICredentialsRepository, CredentialsRepository>();
+            services.AddScoped<IContactRepository, ContactRepository>();
             services.AddSingleton<MainWindow>();
         }
 

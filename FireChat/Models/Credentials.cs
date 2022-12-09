@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FireChat.Models
+﻿namespace FireChat.Models
 {
     public class Credential
     {

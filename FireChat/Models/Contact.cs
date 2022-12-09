@@ -1,10 +1,15 @@
-﻿namespace FireChat.Models;
+﻿using System;
 
-public class Contact
+namespace FireChat.Models;
+
+public class Contact : IHasId
 {
-    public int Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Username { get; set; }
+    public Contact(string username)
+    {
+        Id = Guid.NewGuid().ToString();
+        Username = username;
+    }
 
+    public string Username { get; set; }
+    public string Id { get; set; }
 }

@@ -6,8 +6,8 @@ namespace FireChat.Interfaces;
 
 public interface IMessagesRepository
 {
-    public Task<bool> Send<T>(T item) where T : HasId;
-    public Task<bool> Update<T>(T item) where T : HasId;
-    public Task<bool> Delete<T>(T item) where T : HasId;
-    public Task<List<T>> Read<T>() where T : HasId;
+    public Task<bool> Send(Message message);
+    public Task<bool> Update(Message message);
+    public Task<bool> Delete(Message message);
+    public Task<List<Message>> Read(User fromUser, string toUserEmail);
 }
