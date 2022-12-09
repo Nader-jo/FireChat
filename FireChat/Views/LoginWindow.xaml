@@ -1,0 +1,44 @@
+﻿<Window x:Class="FireChat.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" AllowsTransparency="True"
+        ResizeMode="NoResize" WindowStyle="None" Loaded="LoginWindow_OnLoaded"
+        Title="Login" Height="220" Width="350" Background="Transparent">
+    <Border BorderBrush="Gray" CornerRadius="10" BorderThickness="1" Background="LightYellow">
+        <Border  Margin="10" BorderBrush="Gray" CornerRadius="10" BorderThickness="1" Background="White">
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="85" />
+                <ColumnDefinition Width="45" />
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="80" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="Please input your Login credentials" Margin="0,20,0,20"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Email" VerticalAlignment="Center" />
+            <TextBox x:Name="CapeIdText" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Height="20" Margin="5,5,0,5" />
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Password" VerticalAlignment="Center" />
+            <TextBox x:Name="CapeSecretText" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="4" Height="20" Margin="5,5,0,5" />
+            <CheckBox x:Name="AutoLoginchk" Grid.Row="3" Grid.Column="0" Content="Auto login next time"
+                      Grid.ColumnSpan="5" Margin="0,5,0,5" IsChecked="{Binding AutoLogin}" />
+            <TextBlock  Grid.Row="5" Grid.Column="0" Name="LoginStatusText"/>
+            <Button Grid.Row="5" Grid.Column="1" x:Name="SigninButton" Content="Signin" Height="20" Grid.ColumnSpan="2"
+                    Width="80" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="SigninButton_OnClick" />
+            <Button Grid.Row="5" Grid.Column="2" x:Name="LoginButton" Content="Login" Height="20" Grid.ColumnSpan="2"
+                    Width="80" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="LoginButton_OnClick" />
+            <Button Grid.Row="5" Grid.Column="4" x:Name="CancelButton" Content="Exit" Height="20"
+                    VerticalAlignment="Bottom" IsCancel="True" Click="CancelButton_OnClick" />
+        </Grid>
+        </Border>
+    </Border>
+</Window>

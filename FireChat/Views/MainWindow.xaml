@@ -5,29 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" Background="AliceBlue"
         Title="Fire Chat" Height="400" Width="550">
-	<Grid Margin="10">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="150" />
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="20" />
-			<RowDefinition Height="*" />
-			<RowDefinition Height="40" />
-		</Grid.RowDefinitions>
-		<StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-			<Border Width="15" Height="15" CornerRadius="5" Background="Green" VerticalAlignment="Center"/>
-			<TextBlock Text="Status: Online" HorizontalAlignment="Right" Margin="10,0,0,0" VerticalAlignment="Center"/>
-		</StackPanel>
-		<Border Grid.Row="1" Grid.Column="1" Name="border0" BorderBrush="Gray" BorderThickness="1" Margin="2" CornerRadius="5" Background="White"/>
-		<ListView Grid.Row="1" Grid.Column="1" Name="ContactList" BorderThickness="0" Margin="10" />
-		<Border Grid.Row="1" Grid.Column="0" Name="border1" BorderBrush="Gray" BorderThickness="1" Margin="2" CornerRadius="5" Background="White"/>
-		<TextBlock Grid.Row="1" Grid.Column="0" Name="Messages" Margin="10" />
-		<Border Grid.Row="2" Grid.Column="0" Name="border2" BorderBrush="Gray" BorderThickness="1" Margin="2,2,100,2" CornerRadius="5" Grid.ColumnSpan="2"  Background="White"/>
-		<TextBox Grid.Row="2" Grid.Column="0" Name="text" Margin="5,5,105,5" VerticalAlignment="Center" BorderThickness="0" Grid.ColumnSpan="2" TextWrapping="Wrap" />
-		<Button Grid.Row="2" Grid.Column="1" Name="SendButton" Margin="5" Content="Send" BorderThickness="1" Background="AliceBlue" Width="80" HorizontalAlignment="Right"/>
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="150" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Border Width="15" Height="15" Name="StatusLight" CornerRadius="5" Background="Green" VerticalAlignment="Center" />
+            <TextBlock Text="Status: Online" HorizontalAlignment="Right" Margin="10,0,0,0" VerticalAlignment="Center" />
+        </StackPanel>
+        <Border Grid.Row="1" Grid.Column="1" Name="border0" BorderBrush="Gray" BorderThickness="1" Margin="2"
+                CornerRadius="5" Background="White" />
+        <ListView Grid.Row="1" Grid.Column="1" Name="ContactList" BorderThickness="0" Margin="10" />
+        <Border Grid.Row="1" Grid.Column="0" Name="border1" BorderBrush="Gray" BorderThickness="1" Margin="2"
+                CornerRadius="5" Background="White" />
+        <TextBlock Grid.Row="1" Grid.Column="0" Name="Messages" Margin="10" />
+        <Border Grid.Row="2" Grid.Column="0" Name="border2" BorderBrush="Gray" BorderThickness="1" Margin="2,2,100,2"
+                CornerRadius="5" Grid.ColumnSpan="2" Background="White" />
+        <TextBox Grid.Row="2" Grid.Column="0" Name="text" Margin="5,5,105,5" VerticalAlignment="Center"
+                 BorderThickness="0" Grid.ColumnSpan="2" TextWrapping="Wrap" />
+        <Button Grid.Row="2" Grid.Column="1" Name="SendButton" Margin="5" Content="Send" BorderThickness="1"
+                Background="AliceBlue" Width="80" HorizontalAlignment="Right" />
 
 
-
-	</Grid>
+    </Grid>
 </Window>
