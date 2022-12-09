@@ -11,5 +11,16 @@ namespace FireChat.Views
         {
             InitializeComponent();
         }
+
+        private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Opacity = 0.4; 
+            var loginWindow = new LoginWindow
+            {
+                Topmost = true
+            };
+            loginWindow.Topmost = false;
+            loginWindow.Show();
+        }
     }
 }

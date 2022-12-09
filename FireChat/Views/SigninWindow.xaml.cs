@@ -15,36 +15,29 @@ using System.Windows.Shapes;
 namespace FireChat.Views
 {
     /// <summary>
-    /// Interaction logic for LoginWindow.xaml
+    /// Interaction logic for SigninWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class SigninWindow : Window
     {
-        public LoginWindow()
+        public SigninWindow()
         {
             InitializeComponent();
         }
 
         private void SigninButton_OnClick(object sender, RoutedEventArgs e)
         {
-            Close();
-            var signinWindow = new SigninWindow();
-            signinWindow.Show();
-            signinWindow.Topmost = true;
-            signinWindow.Topmost = false;
-        }
-
-        private void LoginButton_OnClick(object sender, RoutedEventArgs e)
-        {
             throw new NotImplementedException();
         }
 
         private void CancelButton_OnClick(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
-        }
-
-        private void LoginWindow_OnLoaded(object sender, RoutedEventArgs e)
-        {
+            Close();
+            var loginWindow = new LoginWindow
+            {
+                Topmost = true
+            };
+            loginWindow.Topmost = false;
+            loginWindow.Show();
         }
     }
 }
