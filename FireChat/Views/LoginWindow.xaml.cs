@@ -9,14 +9,16 @@ namespace FireChat.Views
     /// </summary>
     public partial class LoginWindow : Window
     {
-        private readonly ISecurityRepository _securityRepository;
-        private MainWindow _parentWindow;
+		private readonly ISecurityRepository _securityRepository;
+		private readonly ICredentialsRepository _credentialsRepository;
+		private MainWindow _parentWindow;
 
-        public LoginWindow(ISecurityRepository securityRepository, MainWindow parentWindow)
+        public LoginWindow(ISecurityRepository securityRepository, ICredentialsRepository credentialsRepository, MainWindow parentWindow)
         {
             InitializeComponent();
             _securityRepository = securityRepository;
-            _parentWindow = parentWindow;
+            _credentialsRepository = credentialsRepository;
+			_parentWindow = parentWindow;
         }
 
         private void RegisterButton_OnClick(object sender, RoutedEventArgs e)
@@ -24,7 +26,6 @@ namespace FireChat.Views
             var RegisterWindow = new RegisterWindow(_securityRepository, _parentWindow);
             RegisterWindow.Show();
             RegisterWindow.Topmost = true;
-            RegisterWindow.Topmost = false;
         }
 
         private async void LoginButton_OnClickAsync(object sender, RoutedEventArgs e)
@@ -35,9 +36,11 @@ namespace FireChat.Views
                 Password = PasswordText.Password
             };
             var result = await _securityRepository.Login(credential);
-            if (result)
+
+			if (result)
             {
-                _parentWindow.Authenticate();
+				_credentialsRepository.SaveCredentials(credential);
+				_parentWindow.Authenticate();
                 Close();
             }
         }
@@ -49,6 +52,10 @@ namespace FireChat.Views
 
         private void LoginWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
-        }
+            var SavedCred = _credentialsRepository.LoadCredentials();
+            EmailText.Text = SavedCred.Email;
+            PasswordText.Password = SavedCred.Password;
+			AutoLoginchk.IsChecked = SavedCred.AutoLogin;
+		}
     }
 }

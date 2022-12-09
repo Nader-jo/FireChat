@@ -1,7 +1,9 @@
 ﻿using FireChat.Interfaces;
 using FireChat.Models;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,13 +21,16 @@ namespace FireChat.Repositories
         private static readonly string LoginEndpoint =
             $"https://identitytoolkit.googleapis.com/v1/accounts:RegisterWithPassword?key={ApiKey}";
 
+		private static readonly string LookupEndpoint =
+			$"https://identitytoolkit.googleapis.com/v1/accounts:lookup?key={ApiKey}";
+
         public async Task<bool> Register(User user)
         {
             using (HttpClient client = new HttpClient())
             {
                 var body = new
                 {
-                    email = user.Credential.Email,
+                    idToken = user.Credential.Email,
                     userName = user.Username,
                     password = user.Credential.Password,
                     returnSecureToken = true
@@ -85,5 +90,5 @@ namespace FireChat.Repositories
                 return false;
             }
         }
-    }
+	}
 }

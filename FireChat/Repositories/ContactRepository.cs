@@ -7,7 +7,12 @@ namespace FireChat.Repositories
 {
     internal class ContactRepository : BaseRepository, IContactRepository
     {
-        public async Task<bool> Add(User user, Contact contact)
+		public async Task<bool> Add(User user)
+		{
+			return await Create(new Contact(user.Username, user.Credential.Email));
+		}
+
+		public async Task<bool> Add(User user, Contact contact)
         {
             user.AddContact(contact);
             return await Create(contact);
@@ -29,5 +34,5 @@ namespace FireChat.Repositories
             user.DeleteContact(contact);
             return await Delete(contact);
         }
-    }
+	}
 }

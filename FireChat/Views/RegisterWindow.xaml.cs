@@ -35,8 +35,11 @@ namespace FireChat.Views
                 return (false, "Password not matching!");
             }
 
+			// check 3 email has an account
 
-            return (true, string.Empty);
+			// check 4 username is used
+
+			return (true, string.Empty);
         }
 
         private void RegisterButton_OnClick(object sender, RoutedEventArgs e)

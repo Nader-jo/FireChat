@@ -10,13 +10,16 @@ namespace FireChat.Views
     public partial class MainWindow : Window
     {
         private readonly ISecurityRepository _securityRepository;
-        private bool IsAuthenticated;
+		private readonly ICredentialsRepository _credentialsRepository;
+		private bool IsAuthenticated;
 
-        public MainWindow(ISecurityRepository securityRepository)
+        public MainWindow(ISecurityRepository securityRepository, ICredentialsRepository credentialsRepository)
         {
             InitializeComponent();
             _securityRepository = securityRepository;
-        }
+            _credentialsRepository = credentialsRepository;
+
+		}
 
         public void Authenticate()
         {
@@ -26,11 +29,9 @@ namespace FireChat.Views
         private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
             Opacity = 0.4;
-            var loginWindow = new LoginWindow(_securityRepository, this)
-            {
-                Topmost = true
-            };
-            loginWindow.Show();
+            var loginWindow = new LoginWindow(_securityRepository, _credentialsRepository, this);
+            loginWindow.Topmost = true;
+			loginWindow.Show();
         }
 
         private void MainWindow_OnClosing(object? sender, CancelEventArgs e)
