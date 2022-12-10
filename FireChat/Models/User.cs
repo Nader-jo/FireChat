@@ -1,22 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace FireChat.Models
 {
-    public class User
+    public class User : IHasId
     {
-        public User(string username, Credential credential)
-        {
-            Username = username;
-            Credential = credential;
-            Contacts = new List<Contact>();
-        }
+		public string Id { get; set; }
+		public string Username { get; set; }
+        public string Email { get; set; }
+        public List<string> ContactEmailList { get; set; }
 
-        public string Username { get; set; }
-        public Credential Credential { get; set; }
-        public List<Contact> Contacts { get; set; }
 
-        public void AddContact(Contact contact) => Contacts.Add(contact);
+		public User(string username, string email)
+		{
+			Id = Guid.NewGuid().ToString();
+			Username = username;
+			Email = email;
+			ContactEmailList = new List<string>();
+		}
 
-        public void DeleteContact(Contact contact) => Contacts.Remove(contact);
+		public void AddContact(string contact) => ContactEmailList.Add(contact);
+        public void DeleteContact(string contact) => ContactEmailList.Remove(contact);
     }
 }

@@ -9,5 +9,5 @@ public interface IMessagesRepository
     public Task<bool> Send(Message message);
     public Task<bool> Update(Message message);
     public Task<bool> Delete(Message message);
-    public Task<List<Message>> Read(User fromUser, string toUserEmail);
+    public Task<List<Message>> Read(string fromUserEmail, string toUserEmail);
 }

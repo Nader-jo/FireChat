@@ -15,7 +15,8 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+		<TextBlock  Grid.Row="0" Grid.Column="0" Name="UsernameTxt"/>
+		<StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <Border Width="15" Height="15" Name="StatusLight" CornerRadius="5" Background="Green"
                     VerticalAlignment="Center" />
             <TextBlock Text="Status: Online" HorizontalAlignment="Right" Margin="10,0,0,0" VerticalAlignment="Center" />
@@ -32,7 +33,7 @@
         </Border>
         <Border Grid.Row="2" Grid.Column="0" Name="Border2" BorderBrush="Gray" BorderThickness="1" Margin="2,2,100,2"
                 CornerRadius="5" Grid.ColumnSpan="2" Background="White">
-            <TextBox Name="Text" Margin="5,5,105,5" VerticalAlignment="Center" BorderThickness="0" TextWrapping="Wrap" />
+            <TextBox Name="Text" Margin="5" VerticalAlignment="Center" BorderThickness="0" TextWrapping="Wrap" />
         </Border>
         <Button Grid.Row="2" Grid.Column="1" Name="SendButton" Margin="5" Content="Send" BorderThickness="1"
                 Background="AliceBlue" Width="80" HorizontalAlignment="Right" />

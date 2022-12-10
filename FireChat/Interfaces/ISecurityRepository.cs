@@ -6,5 +6,5 @@ namespace FireChat.Interfaces;
 public interface ISecurityRepository
 {
     public Task<bool> Login(Credential credential);
-	public Task<bool> Register(User user);
+	public Task<bool> Register(Credential credential);
 }

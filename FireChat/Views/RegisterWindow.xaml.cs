@@ -10,15 +10,17 @@ namespace FireChat.Views
     /// </summary>
     public partial class RegisterWindow : Window
     {
-        private readonly ISecurityRepository _securityRepository;
-        private MainWindow _parentWindow;
+		private readonly ISecurityRepository _securityRepository;
+		private MainWindow _parentWindow;
+		private LoginWindow _loginWindow;
 
-        public RegisterWindow(ISecurityRepository securityRepository, MainWindow parentWindow)
+		public RegisterWindow(ISecurityRepository securityRepository, MainWindow parentWindow, LoginWindow loginWindow)
         {
             InitializeComponent();
             _securityRepository = securityRepository;
             _parentWindow = parentWindow;
-        }
+            _loginWindow = loginWindow;
+		}
 
         private (bool, string) ValidateData()
         {
@@ -35,14 +37,12 @@ namespace FireChat.Views
                 return (false, "Password not matching!");
             }
 
-			// check 3 email has an account
-
 			// check 4 username is used
 
 			return (true, string.Empty);
         }
 
-        private void RegisterButton_OnClick(object sender, RoutedEventArgs e)
+        private async void RegisterButton_OnClick(object sender, RoutedEventArgs e)
         {
             var (isValid, errorMessage) = ValidateData();
             if (!isValid)
@@ -51,15 +51,18 @@ namespace FireChat.Views
                     MessageBoxImage.Asterisk);
                 return;
             }
+            var credential = new Credential
+            {
+                Email = EmailText.Text,
+                Password = Password1Text.Password
+            };
 
-            var newUser = new User(UserNameText.Text, new Credential()
-                {
-                    AutoLogin = false,
-                    Email = EmailText.Text,
-                    Password = Password1Text.Password
-                }
-            );
-            _securityRepository.Register(newUser);
+            var newUser = new User(UserNameText.Text, EmailText.Text);
+            var result = await _securityRepository.Register(credential);
+            if (result) {
+			    await _loginWindow.SetUserAndCredentials(newUser, credential);
+				Close();
+			}
         }
 
         private void CancelButton_OnClick(object sender, RoutedEventArgs e)
