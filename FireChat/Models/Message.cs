@@ -9,12 +9,12 @@ namespace FireChat.Models
 
     public class Message : IHasId
     {
-        public Message(string fromUser, string toUser, DateTime seenDate, string content, string id)
+        public Message(string fromUser, string toUser, string content)
         {
             FromUserEmail = fromUser;
             ToUserEmail = toUser;
             SentDate = DateTime.Now;
-            SeenDate = seenDate;
+            SeenDate = DateTime.MaxValue;
             Content = content;
             Id = Guid.NewGuid().ToString();
         }

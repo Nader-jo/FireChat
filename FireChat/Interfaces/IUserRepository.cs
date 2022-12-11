@@ -10,6 +10,7 @@ namespace FireChat.Interfaces
 		public Task<bool> AddContact(User user, string contactEmail);
 		public Task<List<User>> GetAll();
 		public Task<User> GetByEmail(string userEmail);
+		public Task<List<User>> GetByEmail(List<string> userEmailList);
 		public Task<User> GetByUsername(string userUsername);
 		public Task<List<User>> Search(string userUsernameOrUserEmail);
 		public Task<bool> DeleteContact(User user, string contactEmail);

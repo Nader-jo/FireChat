@@ -28,7 +28,7 @@
         <Border Grid.Row="2" Grid.Column="1" Name="Border0" BorderBrush="Gray" BorderThickness="1" Margin="2"
                 CornerRadius="5" Background="White">
 			<ScrollViewer BorderThickness="0">
-				<ListView Name="ContactList">
+				<ListView Name="ContactList" SelectionChanged="ContactList_SelectionChanged">
 					
 				</ListView>
 			</ScrollViewer>
@@ -45,7 +45,7 @@
             <TextBox Name="Text" Margin="5" VerticalAlignment="Center" BorderThickness="0" TextWrapping="Wrap" />
         </Border>
         <Button Grid.Row="3" Grid.Column="1" Name="SendButton" Margin="5" Content="Send" BorderThickness="1"
-                Background="AliceBlue" Width="80" HorizontalAlignment="Right" />
+                Background="AliceBlue" Width="80" HorizontalAlignment="Right" Click="SendButton_Click" />
 
 
     </Grid>

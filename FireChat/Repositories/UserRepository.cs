@@ -46,5 +46,10 @@ namespace FireChat.Repositories
 				u.Username.ToLower().Contains(userUsernameOrUserEmail) ||
 				u.Email.ToLower().Contains(userUsernameOrUserEmail));
 		}
+
+		public async Task<List<User>> GetByEmail(List<string> userEmailList)
+		{
+			return (await GetAll()).FindAll(u => userEmailList.Contains(u.Email));
+		}
 	}
 }
