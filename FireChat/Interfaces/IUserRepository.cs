@@ -11,6 +11,7 @@ namespace FireChat.Interfaces
 		public Task<List<User>> GetAll();
 		public Task<User> GetByEmail(string userEmail);
 		public Task<User> GetByUsername(string userUsername);
+		public Task<List<User>> Search(string userUsernameOrUserEmail);
 		public Task<bool> DeleteContact(User user, string contactEmail);
     }
 }

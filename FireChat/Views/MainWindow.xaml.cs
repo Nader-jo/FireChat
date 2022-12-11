@@ -2,6 +2,7 @@
 using FireChat.Interfaces;
 using System.Windows;
 using FireChat.Models;
+using System;
 
 namespace FireChat.Views
 {
@@ -29,7 +30,7 @@ namespace FireChat.Views
 
         public void Authenticate(User user, Credential credential)
         {
-			currentUser = user;
+            UpdateContactList(user);
 			currentUserCredentials = credential;
 			IsAuthenticated = true;
         }
@@ -51,5 +52,20 @@ namespace FireChat.Views
         {
             UsernameTxt.Text = currentUser.Username;
 		}
-    }
+
+		private void AddContactButton_Click(object sender, RoutedEventArgs e)
+		{
+			Opacity = 0.4;
+			var addContactWindow = new AddContactWindow(_userRepository, this, currentUser);
+			addContactWindow.Topmost = true;
+			addContactWindow.Show();
+		}
+
+		internal void UpdateContactList(User newUser)
+		{
+            currentUser = newUser;
+            ContactList.ItemsSource = currentUser.ContactEmailList;
+
+		}
+	}
 }

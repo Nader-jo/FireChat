@@ -53,7 +53,7 @@ namespace FireChat.Views
 					user = await _userRepository.GetByEmail(EmailText.Text);
 				}
 				_parentWindow.Authenticate(user, credential);
-				//_parentWindow.LoadUserContacts();
+				_parentWindow.LoadUserContacts();
 				_parentWindow.Opacity = 1;
 				Close();
 			}

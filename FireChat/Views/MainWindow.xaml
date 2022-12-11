@@ -12,8 +12,10 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="40" />
+			<RowDefinition Height="40" />
+
+			<RowDefinition Height="*" />
+			<RowDefinition Height="40" />
         </Grid.RowDefinitions>
 		<TextBlock  Grid.Row="0" Grid.Column="0" Name="UsernameTxt"/>
 		<StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -21,21 +23,28 @@
                     VerticalAlignment="Center" />
             <TextBlock Text="Status: Online" HorizontalAlignment="Right" Margin="10,0,0,0" VerticalAlignment="Center" />
         </StackPanel>
-        <Border Grid.Row="1" Grid.Column="1" Name="Border0" BorderBrush="Gray" BorderThickness="1" Margin="2"
+		<Button Grid.Row="1" Grid.Column="1" Margin="5" Content="Add Contact" BorderThickness="1" Name="AddContactButton"
+                Background="AliceBlue" Click="AddContactButton_Click"/>
+        <Border Grid.Row="2" Grid.Column="1" Name="Border0" BorderBrush="Gray" BorderThickness="1" Margin="2"
                 CornerRadius="5" Background="White">
-            <ListView Name="ContactList" BorderThickness="0" Margin="10" />
-        </Border>
+			<ScrollViewer BorderThickness="0">
+				<ListView Name="ContactList">
+					
+				</ListView>
+			</ScrollViewer>
+		</Border>
         <Border Grid.Row="1" Grid.Column="0" Name="Border1" BorderBrush="Gray" BorderThickness="1" Margin="2"
-                CornerRadius="5" Background="White">
+                CornerRadius="5" Background="White" Grid.RowSpan="2">
             <ScrollViewer>
                 <TextBlock Name="Messages" Margin="10" />
             </ScrollViewer>
         </Border>
-        <Border Grid.Row="2" Grid.Column="0" Name="Border2" BorderBrush="Gray" BorderThickness="1" Margin="2,2,100,2"
+		
+		<Border Grid.Row="3" Grid.Column="0" Name="Border2" BorderBrush="Gray" BorderThickness="1" Margin="2,2,100,2"
                 CornerRadius="5" Grid.ColumnSpan="2" Background="White">
             <TextBox Name="Text" Margin="5" VerticalAlignment="Center" BorderThickness="0" TextWrapping="Wrap" />
         </Border>
-        <Button Grid.Row="2" Grid.Column="1" Name="SendButton" Margin="5" Content="Send" BorderThickness="1"
+        <Button Grid.Row="3" Grid.Column="1" Name="SendButton" Margin="5" Content="Send" BorderThickness="1"
                 Background="AliceBlue" Width="80" HorizontalAlignment="Right" />
 
 

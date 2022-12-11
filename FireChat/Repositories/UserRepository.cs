@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace FireChat.Repositories
 {
-    internal class UserRepository : BaseRepository, IUserRepository
-    {
+	internal class UserRepository : BaseRepository, IUserRepository
+	{
 		public async Task<bool> Add(User user)
 		{
 			return await Create(user);
@@ -38,6 +38,13 @@ namespace FireChat.Repositories
 		{
 			user.DeleteContact(contactEmail);
 			return await Update(user);
+		}
+
+		public async Task<List<User>> Search(string userUsernameOrUserEmail)
+		{
+			return (await GetAll()).FindAll(u =>
+				u.Username.ToLower().Contains(userUsernameOrUserEmail) ||
+				u.Email.ToLower().Contains(userUsernameOrUserEmail));
 		}
 	}
 }
