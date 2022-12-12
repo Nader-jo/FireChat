@@ -2,7 +2,6 @@
 using FireChat.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -34,18 +33,26 @@ namespace FireChat.Views
 
         private async void AddContactButton_Click(object sender, RoutedEventArgs e)
         {
-            var regex = new Regex(@"\(([^)]+)\)");
             var selectedStr = ResultUserList.SelectedItem.ToString();
             if (selectedStr == null)
             {
                 return;
             }
 
-            var matches = regex.Matches(selectedStr);
-            await _userRepository.AddContact(_currentUser, matches.FirstOrDefault().Value.Trim('(').Trim(')'));
-            var newUser = await _userRepository.GetByUsername(_currentUser.Username);
+            int startIndex = selectedStr.IndexOf('(');
+            string contactEmail = string.Empty;
+            if (startIndex >= 0)
+            {
+                int endIndex = selectedStr.IndexOf(')', startIndex);
+                if (endIndex > startIndex)
+                {
+                    contactEmail = selectedStr.Substring(startIndex + 1, endIndex - startIndex - 1);
+                }
+            }
+
+            await _userRepository.AddContact(_currentUser, contactEmail.Trim('(').Trim(')'));
             _mainWindow.Opacity = 1;
-            _mainWindow.UpdateContactList(newUser);
+            _mainWindow.UpdateContactList(_currentUser);
             Close();
         }
 
@@ -60,10 +67,14 @@ namespace FireChat.Views
             _userList = await _userRepository.Search(ContactNameSearchText.Text.Trim());
             if (_userList != null && _userList.Count != 0)
             {
-                AddContactButton.IsEnabled = true;
-                ResultUserList.ItemsSource = _userList.FindAll(u => u.Email != _currentUser.Email)
+                ResultUserList.ItemsSource = _userList.FindAll(u => u.Email != _currentUser.Email && !_currentUser.ContactEmailList.Contains(u.Email))
                     .Select(u => $"{u.Username} ({u.Email})");
             }
+        }
+
+        private void ResultUserList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            AddContactButton.IsEnabled = true;
         }
     }
 }

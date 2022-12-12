@@ -46,11 +46,11 @@ namespace FireChat.Views
             if (result)
             {
                 _credentialsRepository.SaveCredentials(credential);
+                _user ??= await _userRepository.GetByEmail(EmailText.Text);
                 if (_user is null)
                 {
-                    _user = await _userRepository.GetByEmail(EmailText.Text);
+                    return;
                 }
-
                 _parentWindow.Authenticate(_user, credential);
                 _parentWindow.LoadUserContacts();
                 _parentWindow.Opacity = 1;

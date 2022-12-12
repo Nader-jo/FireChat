@@ -26,12 +26,17 @@ namespace FireChat.Repositories
 
         public async Task<User> GetByEmail(string userEmail)
         {
-            return (await GetAll()).FirstOrDefault(u => u.Email == userEmail);
+            return (await GetAll()).FirstOrDefault(u => u.Email == userEmail)!;
+        }
+
+        public async Task<List<User>> GetByEmail(List<string> userEmailList)
+        {
+            return (await GetAll()).FindAll(u => userEmailList.Contains(u.Email));
         }
 
         public async Task<User> GetByUsername(string username)
         {
-            return (await GetAll()).FirstOrDefault(u => u.Username == username);
+            return (await GetAll()).FirstOrDefault(u => u.Username == username)!;
         }
 
         public async Task<bool> DeleteContact(User user, string contactEmail)
@@ -45,11 +50,6 @@ namespace FireChat.Repositories
             return (await GetAll()).FindAll(u =>
                 u.Username.ToLower().Contains(userUsernameOrUserEmail) ||
                 u.Email.ToLower().Contains(userUsernameOrUserEmail));
-        }
-
-        public async Task<List<User>> GetByEmail(List<string> userEmailList)
-        {
-            return (await GetAll()).FindAll(u => userEmailList.Contains(u.Email));
         }
     }
 }

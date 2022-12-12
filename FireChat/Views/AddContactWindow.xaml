@@ -25,7 +25,7 @@
 				<TextBlock Grid.Row="0" Grid.Column="0" Text="Searching for Contact" Grid.ColumnSpan="4" Margin="0,5,5,5"/>
 				<TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Name="ContactNameSearchText" Margin="0,5,0,5" TextChanged="ContactNameSearchText_OnTextChanged"/>
 				<Image Grid.Row="1" Grid.Column="3" Width="24" Height="24" HorizontalAlignment="Right" Margin="0,5,0,5" Source="../Icons/search.png"/>
-				<ListView Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Name="ResultUserList" Margin="0,5,0,5"/>
+				<ListView Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Name="ResultUserList" Margin="0,5,0,5" SelectionChanged="ResultUserList_OnSelectionChanged"/>
 				<TextBlock Grid.Row="4" Grid.Column="0" Text="Select contact"/>
 				<Button Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Name="AddContactButton" Width="80" Height="20" Margin="0,0,5,0" Content="Add Contact" IsEnabled="False" Click="AddContactButton_Click"/>
 				<Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Name="CancelButton" Width="80" Height="20" Content="Cancel" IsCancel="True" Click="CancelButton_Click"/>

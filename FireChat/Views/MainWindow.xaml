@@ -29,8 +29,12 @@
                 CornerRadius="5" Background="White">
 			<ScrollViewer BorderThickness="0">
 				<ListView Name="ContactList" SelectionChanged="ContactList_SelectionChanged">
-					
-				</ListView>
+                    <ListView.ContextMenu>
+                        <ContextMenu Name="ContextMenu">
+                            <MenuItem Header="Delete" Click="MenuItem_OnClick"/>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                </ListView>
 			</ScrollViewer>
 		</Border>
         <Border Grid.Row="1" Grid.Column="0" Name="Border1" BorderBrush="Gray" BorderThickness="1" Margin="2"

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace FireChat.Views
@@ -78,9 +79,13 @@ namespace FireChat.Views
             ContactList.SelectedIndex = 0;
         }
 
-        private async void ContactList_SelectionChanged(object sender,
-            System.Windows.Controls.SelectionChangedEventArgs e)
+        private async void ContactList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (ContactList.SelectedValue is null)
+            {
+                return;
+            }
+
             var messagesFromContact =
                 await _messagesRepository.Read(((User)ContactList.SelectedValue).Email, _currentUser.Email);
             var messagesToContact =
@@ -112,6 +117,15 @@ namespace FireChat.Views
             if (e.Key == Key.Enter)
             {
                 SendButton_Click(new object(), new RoutedEventArgs());
+            }
+        }
+
+        private async void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (ContactList.SelectedItem is User selectedContact)
+            {
+                await _userRepository.DeleteContact(_currentUser, selectedContact.Email);
+                UpdateContactList(_currentUser);
             }
         }
     }
