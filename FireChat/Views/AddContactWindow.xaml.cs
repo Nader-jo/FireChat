@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace FireChat.Views
 {
@@ -23,21 +24,6 @@ namespace FireChat.Views
             _userRepository = userRepository;
             _mainWindow = mainWindow;
             _currentUser = currentUser;
-        }
-
-        private async void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(ContactNameSearchText.Text.Trim()))
-            {
-                return;
-            }
-
-            _userList = await _userRepository.Search(ContactNameSearchText.Text.Trim());
-            if (_userList != null && _userList.Count != 0)
-            {
-                AddContactButton.IsEnabled = true;
-                ResultUserList.ItemsSource = _userList.Select(u => $"{u.Username} ({u.Email})");
-            }
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -61,6 +47,23 @@ namespace FireChat.Views
             _mainWindow.Opacity = 1;
             _mainWindow.UpdateContactList(newUser);
             Close();
+        }
+
+        private async void ContactNameSearchText_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(ContactNameSearchText.Text.Trim()))
+            {
+                ResultUserList.ItemsSource = null;
+                return;
+            }
+
+            _userList = await _userRepository.Search(ContactNameSearchText.Text.Trim());
+            if (_userList != null && _userList.Count != 0)
+            {
+                AddContactButton.IsEnabled = true;
+                ResultUserList.ItemsSource = _userList.FindAll(u => u.Email != _currentUser.Email)
+                    .Select(u => $"{u.Username} ({u.Email})");
+            }
         }
     }
 }
