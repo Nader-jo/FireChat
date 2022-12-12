@@ -6,50 +6,50 @@ using System.Threading.Tasks;
 
 namespace FireChat.Repositories
 {
-	internal class UserRepository : BaseRepository, IUserRepository
-	{
-		public async Task<bool> Add(User user)
-		{
-			return await Create(user);
-		}
+    internal class UserRepository : BaseRepository, IUserRepository
+    {
+        public async Task<bool> Add(User user)
+        {
+            return await Create(user);
+        }
 
-		public async Task<bool> AddContact(User user, string contactEmail)
-		{
-			user.AddContact(contactEmail);
-			return await Update(user);
-		}
+        public async Task<bool> AddContact(User user, string contactEmail)
+        {
+            user.AddContact(contactEmail);
+            return await Update(user);
+        }
 
-		public async Task<List<User>> GetAll()
-		{
-			return await Read<User>();
-		}
+        public async Task<List<User>> GetAll()
+        {
+            return await Read<User>();
+        }
 
-		public async Task<User> GetByEmail(string userEmail)
-		{
-			return (await GetAll()).FirstOrDefault(u => u.Email == userEmail);
-		}
+        public async Task<User> GetByEmail(string userEmail)
+        {
+            return (await GetAll()).FirstOrDefault(u => u.Email == userEmail);
+        }
 
-		public async Task<User> GetByUsername(string username)
-		{
-			return (await GetAll()).FirstOrDefault(u => u.Username == username);
-		}
+        public async Task<User> GetByUsername(string username)
+        {
+            return (await GetAll()).FirstOrDefault(u => u.Username == username);
+        }
 
-		public async Task<bool> DeleteContact(User user, string contactEmail)
-		{
-			user.DeleteContact(contactEmail);
-			return await Update(user);
-		}
+        public async Task<bool> DeleteContact(User user, string contactEmail)
+        {
+            user.DeleteContact(contactEmail);
+            return await Update(user);
+        }
 
-		public async Task<List<User>> Search(string userUsernameOrUserEmail)
-		{
-			return (await GetAll()).FindAll(u =>
-				u.Username.ToLower().Contains(userUsernameOrUserEmail) ||
-				u.Email.ToLower().Contains(userUsernameOrUserEmail));
-		}
+        public async Task<List<User>> Search(string userUsernameOrUserEmail)
+        {
+            return (await GetAll()).FindAll(u =>
+                u.Username.ToLower().Contains(userUsernameOrUserEmail) ||
+                u.Email.ToLower().Contains(userUsernameOrUserEmail));
+        }
 
-		public async Task<List<User>> GetByEmail(List<string> userEmailList)
-		{
-			return (await GetAll()).FindAll(u => userEmailList.Contains(u.Email));
-		}
-	}
+        public async Task<List<User>> GetByEmail(List<string> userEmailList)
+        {
+            return (await GetAll()).FindAll(u => userEmailList.Contains(u.Email));
+        }
+    }
 }

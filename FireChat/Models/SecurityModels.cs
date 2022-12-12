@@ -1,8 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System;
-
-namespace FireChat.Models
+﻿namespace FireChat.Models
 {
 	public class AuthResult
 	{

@@ -36,13 +36,13 @@
         <Border Grid.Row="1" Grid.Column="0" Name="Border1" BorderBrush="Gray" BorderThickness="1" Margin="2"
                 CornerRadius="5" Background="White" Grid.RowSpan="2">
             <ScrollViewer>
-                <TextBlock Name="Messages" Margin="10" />
+                <TextBlock Name="Messages" Margin="10" Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=Messages}" />
             </ScrollViewer>
         </Border>
 		
 		<Border Grid.Row="3" Grid.Column="0" Name="Border2" BorderBrush="Gray" BorderThickness="1" Margin="2,2,100,2"
                 CornerRadius="5" Grid.ColumnSpan="2" Background="White">
-            <TextBox Name="Text" Margin="5" VerticalAlignment="Center" BorderThickness="0" TextWrapping="Wrap" />
+            <TextBox Name="Text" Margin="5" VerticalAlignment="Center" BorderThickness="0" TextWrapping="Wrap" KeyDown="Text_OnKeyDown" />
         </Border>
         <Button Grid.Row="3" Grid.Column="1" Name="SendButton" Margin="5" Content="Send" BorderThickness="1"
                 Background="AliceBlue" Width="80" HorizontalAlignment="Right" Click="SendButton_Click" />
